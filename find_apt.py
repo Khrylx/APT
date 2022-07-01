@@ -100,10 +100,10 @@ check_availability(filter_res=True)
 
 while True:
 
-    while datetime.now().minute % 30 != 0:
+    while datetime.now().minute % 15 != 0:
         sleep(1)
     
-    if datetime.now().hour == 9 and datetime.now().minute < 15:
+    if datetime.now().hour == 9 and datetime.now().minute < 10:
         check_availability()
         sleep(60)
 
