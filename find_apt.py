@@ -36,6 +36,7 @@ def check_availability(filter_res=False):
 
         while True:
             browser = webdriver.Firefox(options=opts)
+            browser.implicitly_wait(10)
             browser.get(apt_url)
             raw_html = browser.page_source
             soup = bs(raw_html, "lxml")
