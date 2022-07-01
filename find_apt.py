@@ -21,6 +21,9 @@ apartments = {
     "Monticello": 'https://www.irvinecompanyapartments.com/locations/northern-california/santa-clara/monticello/availability.html?baths=2&beds=2#floor-plan-list'
 }
 
+filter_apt = {
+    "Santa Clara Square": {'03 330'}
+}
 
 filter_start_date = datetime(2022, 8, 20)
 
@@ -59,7 +62,7 @@ def check_availability(filter_res=False):
             avail = unit.find('div', class_='fapt-fp-unit__column-inner fapt-fp-unit__column-inner--available').text.strip()
             date = datetime.now() if avail == 'Today' else datetime.strptime(avail, '%m/%d/%Y')
 
-            if filter_res and date < filter_start_date:
+            if filter_res and (date < filter_start_date or name in filter_apt[apt_name]):
                 continue
 
             messages.append(f'{name:8s} - {price:8s} - {avail:12s}\n')
@@ -67,7 +70,7 @@ def check_availability(filter_res=False):
             
         if len(messages) > 0:
             messages = [x for _, x in reversed(sorted(zip(avail_dates, messages)))]
-            message_all_units = '=' * 20 + ' ' + apt_name + (' (Filtered)' if filter_res else '') + ' ' + '=' * 20 + '\n' + ''.join(messages)
+            message_all_units = '=' * 20 + ' ' + apt_name + (' (Filtered)' if filter_res else '') + ' ' + datetime.now().strftime("%m/%d %H:%M") + ' ' + '=' * 20 + '\n' + ''.join(messages)
             print(message_all_units)
 
             wandb.alert(
@@ -84,6 +87,8 @@ def check_availability(filter_res=False):
                 level=wandb.AlertLevel.WARN,
                 wait_duration=0
             )
+        else:
+            print(f'No units available for {apt_name} (Filtered)')
 
         
         browser.quit()
