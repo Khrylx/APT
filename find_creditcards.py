@@ -89,9 +89,10 @@ def check_availability(filter_res=False):
 check_availability()
 
 while True:
-    
-    if datetime.now().hour == 9 and datetime.now().minute < 10:
+
+    if datetime.now().hour == 5 and datetime.now().minute < 10:
         check_availability()
+        sleep(800)
 
     sleep(60)
 
