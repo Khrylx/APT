@@ -57,7 +57,7 @@ def check_availability(filter_res=False):
 
         text = [x.text.strip() for x in elements if 'bonus' in x.text.lower().strip()][0]
         text = text.replace(',', '')
-        points = [int(x) for x in text.split() if x.isdigit()][0]
+        points = max([int(x) for x in text.split() if x.isdigit()])
         if points > points_threshold[cc_name]:
             success = True
         
