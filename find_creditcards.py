@@ -17,8 +17,8 @@ opts = FirefoxOptions()
 opts.add_argument("--headless")
 
 credit_cards = {
-    "MBB": 'https://creditcard.americanexpress.com/d/bonvoy-business/',
-    "CSP": 'https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred',
+    # "MBB": 'https://creditcard.americanexpress.com/d/bonvoy-business/',
+    "CSP": 'https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred2',
 }
 
 points_threshold = {
@@ -44,7 +44,7 @@ def check_availability(filter_res=False):
             soup = bs(raw_html, "lxml")
             html = soup.prettify()
             if cc_name == "CSP":
-                elements = soup.find_all('strong', class_='description-title')
+                elements = soup.find_all('h3', class_='primary-item-title')
             elif cc_name == "MBB":
                 elements = soup.find_all('p', class_='text-32 line-height-44 font-bold h-top-5')
             
