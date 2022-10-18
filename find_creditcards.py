@@ -18,7 +18,7 @@ opts.add_argument("--headless")
 
 credit_cards = {
     # "MBB": 'https://creditcard.americanexpress.com/d/bonvoy-business/',
-    "CSP": 'https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred2',
+    "CSP": 'https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred',
 }
 
 points_threshold = {
